@@ -64,9 +64,9 @@ class base_simulation(object):
     		except:
     			self.special_dates = []
 
-    		self.instruments = None
+    		self.instrument_values = None
     		self.correlated = corr
-    		if corr is true:
+    		if corr is True:
     			self.cholesky_matrix = mar_env.get_list("cholesky_matrix")
     			self.rn_set = mar_env.get_list("rn_set")[self.name]
     			self.random_numbers = mar_env.get_list("random_numbers")
@@ -96,8 +96,8 @@ class base_simulation(object):
 
     	self.time_grid = np.array(time_grid)
 
-    def get_instrument_values(self, fixed_seed=true):
-        if instrument_values is None:
+    def get_instrument_values(self, fixed_seed=True):
+        if self.instrument_values is None:
             self.generate_paths(fixed_seed=fixed_seed, day_count=365.0)
         elif fixed_seed is False:
         	self.generate_paths(fixed_seed=fixed_seed, day_count=365.0)

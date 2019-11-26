@@ -24,7 +24,7 @@ def standard_normal_rn(shape, antithetic=False, moment_matching=True, fixed_seed
 		np.random.seed(1000)
 	
 	if antithetic:
-		ran = np.random.standard_normal((shape[0], shape[1], int(shape[2]/2)))
+		ran = np.random.standard_normal((shape[0], shape[1], shape[2]/2))
 		ran = np.concatenate((ran, -ran), axis=2)
 	else:
 		ran = np.random.standard_normal(shape)

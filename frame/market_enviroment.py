@@ -54,7 +54,7 @@ class market_enviroment(object):
 	def add_constant(self, key, constant):
 		self.constants[key] = constant
 	def get_constant(self, key):
-		return self.constant[key]
+		return self.constants[key]
 
 	def add_list(self, key, list_object):
 		self.lists[key] = list_object
