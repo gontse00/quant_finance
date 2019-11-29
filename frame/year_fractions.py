@@ -10,11 +10,11 @@ i) Constructing a list of conrete dates(e.g datetime.datetime objects)
 ii)year fractions (as decimals, as is often done in theory)
 """
 
+import numpy as np
 
-import numpy as np 
 
 def year_fractions(date_list, day_count=365.):
-	"""
+    """
 	return a vector of floats with day fractions in years.
 	Initial value normalized to zero.
 
@@ -29,7 +29,6 @@ def year_fractions(date_list, day_count=365.):
 	i) delta_list: array (year fractions)
 	"""
 
-	start = date_list[0]
-	delta_list = [(date-start).days/day_count for date in date_list]
-	return np.array(delta_list)
-	
+    start = date_list[0]
+    delta_list = [(date - start).days / day_count for date in date_list]
+    return np.array(delta_list)
