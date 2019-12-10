@@ -12,6 +12,7 @@ class positions(object):
         self.payoff_func = payoff_func
 
     def get_info(self):
+        print(100*"=")
         print("NAME:", self.name)
         print("QUANTITY:", self.quantity)
         print("UNDERLYING:", self.underlying)
@@ -30,4 +31,4 @@ class positions(object):
             print(key+":", value)
 
         print("OPTION TYPE:", self.otype)
-        print("PAYOFF FUNCTION:", self.payoff_func)
+        print("PAYOFF FUNCTION:", self.payoff_func, "\n")

@@ -31,7 +31,7 @@ class base_valuation(object):
                 pass
             self.maturity = mar_env.get_constant("maturity")
             self.currency = mar_env.get_constant("currency")
-            self.frequency = mar_env.get_constant("frequency")
+            self.frequency = underlying.frequency
             self.paths = underlying.paths
             self.discount_curve = underlying.discount_curve
             self.payoff_func = payoff_func

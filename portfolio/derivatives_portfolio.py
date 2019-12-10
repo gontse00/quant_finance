@@ -38,10 +38,12 @@ class derivatives_portfolio(object):
         self.special_dates = []
 
         for pos in self.positions:
-            self.val_env.constants['starting_date'] = min(self.val_env.constants['starting_date'],
-                                                          positions[pos].mar_env.pricing_date)
-            self.val_env.constants['final_date'] = max(self.val_env.constants['final_date'],
-                                                       positions[pos].mar_env.pricing_date)
+            self.val_env.constants['starting_date'] = \
+                min(self.val_env.constants['starting_date'],
+                    positions[pos].mar_env.pricing_date)
+            self.val_env.constants['final_date'] = \
+                max(self.val_env.constants['final_date'],
+                    positions[pos].mar_env.constants['maturity'])
             self.underlyings.add(positions[pos].underlying)
 
         start = self.val_env.constants['starting_date']
@@ -79,7 +81,7 @@ class derivatives_portfolio(object):
             cholesky_matrix = np.linalg.cholesky(np.array(correlation_matrix))
 
             rn_set = {
-                asset: ul_list.index((asset)) for asset in self.underlyings
+                asset: ul_list.index(asset) for asset in self.underlyings
             }
 
             random_numbers = standard_normal_rn(
