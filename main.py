@@ -35,7 +35,7 @@ me_jd.add_enviroment(me_gbm)
 #create market environment and positions environment for call option
 me_eur_call = market_enviroment("me_call", me_jd.pricing_date)
 me_eur_call.add_constant("strike", 38.0)
-me_eur_call.add_constant("maturity", dt.datetime(2015, 12, 31))
+me_eur_call.add_constant("maturity", dt.datetime(2015, 6, 30))
 me_eur_call.add_constant("currency", "ZAR")
 call_payoff = 'np.maximum(maturity_value-strike, 0)'
 european_call_positions = positions(
@@ -53,7 +53,7 @@ european_call_positions.get_info()
 #create market environment for european put
 me_eur_put = market_enviroment("me_eur_put", dt.datetime(2015, 1, 1))
 me_eur_put.add_constant("strike", 40.)
-me_eur_put.add_constant("maturity", dt.datetime(2015, 12, 31))
+me_eur_put.add_constant("maturity", dt.datetime(2015, 9, 30))
 me_eur_put.add_constant("currency", "ZAR")
 put_payoff = 'np.maximum(strike-maturity_value,0)'
 european_put_positions = positions(
@@ -92,7 +92,7 @@ american_put_positions.get_info()
 #create environment for portfolio valuation
 csr = short_rate("csr", 0.06)
 val_env = market_enviroment("general", me_jd.pricing_date)
-val_env.add_constant("frequency", "W")
+val_env.add_constant("frequency", "B")
 val_env.add_constant("paths", 25000)
 val_env.add_constant("starting_date", val_env.pricing_date)
 val_env.add_constant("final_date", val_env.pricing_date)
@@ -117,3 +117,15 @@ der_port = derivatives_portfolio(
 port_stats = der_port.get_statistics()
 print(port_stats)
 #american_positions.get_info()
+
+path_no = 100
+path_gbm = der_port.underlying_objects["gbm"].get_instrument_values()[:, :4]
+path_jd = der_port.underlying_objects["jd"].get_instrument_values()[:, :4]
+
+import matplotlib.pylab as plt
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
+plt.figure(figsize=(7, 4))
+plt.plot(der_port.time_grid, path_gbm)
+plt.plot(der_port.time_grid, path_jd)
+plt.show()
